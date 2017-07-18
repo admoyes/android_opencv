@@ -12,6 +12,10 @@ import android.net.Uri;
 import java.io.InputStream;
 
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.*;
+import org.opencv.core.Mat;
+import org.opencv.features2d.ORB;
+import org.opencv.objdetect.HOGDescriptor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             if (selectedImageUri != null) {
                 // get the image
-                Log.e(this.getClass().getSimpleName(), " extras is not null.");
+                Log.e(this.getClass().getSimpleName(), " selectedImageUri is not null.");
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else {
-                Log.e(this.getClass().getSimpleName(), " extras is null.");
+                Log.e(this.getClass().getSimpleName(), " selectedImageUri is null.");
             }
         }
 
@@ -68,7 +72,18 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
     }
 
-    public void procesImage(View view) {
+    private void buildFeatures(Bitmap bmp) {
+        Mat theMat = new Mat();
+        Utils.bitmapToMat(bmp, theMat);
+
+
+
+    }
+
+    private void getORBFeatures(Mat mat) {
+        HOGDescriptor hogDescriptor = new HOGDescriptor();
+        hogDescriptor.
+
 
     }
 
